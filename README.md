@@ -30,3 +30,10 @@
 3. Launch the web app:
    ```bash
    npm run start
+### Technology Stack
+1. **React**: Frontend Development
+2. **Ether.js**: Connection to Smart Contract
+3. **Solidity**: Smart Contract Development
+
+### Licence
+This project is under the MIT License - see the LICENSE.md file for details.
