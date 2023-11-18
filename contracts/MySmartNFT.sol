@@ -34,5 +34,4 @@ contract MySmartNFT is  ERC721URIStorage {
             )
         );
     }
-
 }
