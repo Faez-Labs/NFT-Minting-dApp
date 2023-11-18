@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Secutry-Corp/firstProject-blockchain#readme",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "ethers": "^6.8.1",
     "hardhat": "^2.19.1"
   },
   "dependencies": {
