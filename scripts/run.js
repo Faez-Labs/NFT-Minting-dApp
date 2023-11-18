@@ -6,16 +6,14 @@ async function main() {
     `Deployed to ${lock.target}`
   );
   // Call the function.
-  let txn = await nftContract.makeAnEpicNFT()
+  let txn = await lock.makeAnEpicNFT()
   // Wait for it to be mined.
   await txn.wait()
 
   // Mint another NFT for fun.
-  txn = await nftContract.makeAnEpicNFT()
+  txn = await lock.makeAnEpicNFT()
   // Wait for it to be mined.
   await txn.wait()
-
-
 }
 
 main().catch((error) => {

@@ -1,42 +1,34 @@
 // SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.20;
 
-pragma solidity ^0.8.17;
-
-// We first import some OpenZeppelin Contracts.
+import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-//import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 
-// We inherit the contract we imported. This means we'll have access
-// to the inherited contract's methods.
-contract MySmartNFT is ERC721 {
-  // Magic given to us by OpenZeppelin to help us keep track of tokenIds.
-    uint256 private _tokenIds;
+contract MySmartNFT is  ERC721URIStorage {
+    uint256 private _tokenIdTracker;
 
-    // We need to pass the name of our NFTs token and its symbol.
-    constructor() ERC721 ("SquareNFT", "SQUARE") {
+    constructor() ERC721("SquareNFT", "SQUARE") {
         console.log("This is my NFT contract. Woah!");
+        _tokenIdTracker = 0; 
     }
 
-    // A function our user will hit to get their NFT.
     function makeAnEpicNFT() public {
-        // Get the current tokenId, this starts at 0.
-        uint256 newItemId = _tokenIds.current();
-
-        // Actually mint the NFT to the sender using msg.sender.
+        uint256 newItemId = _tokenIdTracker;
         _safeMint(msg.sender, newItemId);
-        
-        // Return the NFT's metadata
         tokenURI(newItemId);
-
-        // Increment the counter for when the next NFT is minted.
-        _tokenIds.increment();
+        _tokenIdTracker += 1; 
     }
 
-  // Set the NFT's metadata
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        require(_exists(_tokenId));
-        console.log("An NFT w/ ID %s has been minted to %s", _tokenId, msg.sender);
+        address owner = ownerOf(_tokenId);
+        require(owner != address(0), "Token ID does not exist");
+
+        console.log("An NFT w/ ID %s has been minted to %s", _tokenId, owner);
         return "INSERT_YOUR_JSON_URL_HERE";
     }
+
 }
