@@ -26,7 +26,6 @@ contract MySmartNFT is  ERC721URIStorage {
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         address owner = ownerOf(_tokenId);
         require(owner != address(0), "Token ID does not exist");
-
         console.log("An NFT w/ ID %s has been minted to %s", _tokenId, owner);
         return "INSERT_YOUR_JSON_URL_HERE";
     }
